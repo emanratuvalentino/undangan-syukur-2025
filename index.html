@@ -8,7 +8,7 @@
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     
     <style>
-        /* --- CSS: PENGATURAN TAMPILAN --- */
+        /* --- CSS: TAMPILAN --- */
         :root {
             --gold: #D4AF37;
             --dark: #1a1a1a;
@@ -16,11 +16,7 @@
             --overlay: rgba(0, 0, 0, 0.7);
         }
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
 
         body {
             font-family: 'Poppins', sans-serif;
@@ -29,17 +25,10 @@
             overflow-x: hidden;
         }
 
-        /* Typography */
-        h1, h2, h3 {
-            font-family: 'Great Vibes', cursive; /* Font sambung elegan */
-            color: var(--gold);
-        }
+        h1, h2, h3 { font-family: 'Great Vibes', cursive; color: var(--gold); }
+        p { line-height: 1.6; }
 
-        p {
-            line-height: 1.6;
-        }
-
-        /* Hero Section (Bagian Atas) */
+        /* Hero Section */
         .hero {
             height: 100vh;
             background-image: url('https://images.unsplash.com/photo-1511795409834-ef04bbd61622?q=80&w=1469&auto=format&fit=crop');
@@ -51,49 +40,14 @@
             text-align: center;
             position: relative;
         }
+        .hero::before { content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: var(--overlay); }
+        .hero-content { position: relative; z-index: 1; padding: 20px; }
+        .hero h1 { font-size: 3.5rem; margin-bottom: 10px; }
+        .scroll-down { position: absolute; bottom: 30px; animation: bounce 2s infinite; font-size: 1.5rem; color: var(--gold); }
 
-        .hero::before {
-            content: '';
-            position: absolute;
-            top: 0; left: 0; right: 0; bottom: 0;
-            background: var(--overlay);
-        }
-
-        .hero-content {
-            position: relative;
-            z-index: 1;
-            padding: 20px;
-        }
-
-        .hero h1 {
-            font-size: 3.5rem;
-            margin-bottom: 10px;
-        }
-
-        .scroll-down {
-            position: absolute;
-            bottom: 30px;
-            animation: bounce 2s infinite;
-            font-size: 1.5rem;
-            color: var(--gold);
-        }
-
-        /* Section Container */
-        .container {
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 50px 20px;
-            text-align: center;
-        }
-
-        /* Event Cards */
-        .syukur-section {
-            display: flex;
-            flex-direction: column;
-            gap: 30px;
-            margin-bottom: 50px;
-        }
-
+        /* Container & Cards */
+        .container { max-width: 800px; margin: 0 auto; padding: 50px 20px; text-align: center; }
+        .syukur-section { display: flex; flex-direction: column; gap: 30px; margin-bottom: 50px; }
         .card {
             background: rgba(255, 255, 255, 0.05);
             border: 1px solid var(--gold);
@@ -101,112 +55,91 @@
             border-radius: 15px;
             transition: transform 0.3s;
         }
+        .card:hover { transform: translateY(-5px); background: rgba(212, 175, 55, 0.1); }
+        .card h2 { font-size: 2.5rem; margin-bottom: 10px; }
+        .date-badge { background: var(--gold); color: var(--dark); padding: 5px 15px; border-radius: 20px; font-weight: bold; display: inline-block; margin-top: 10px; }
 
-        .card:hover {
-            transform: translateY(-5px);
-            background: rgba(212, 175, 55, 0.1);
-        }
+        /* Details */
+        .details-box { background: var(--white); color: var(--dark); padding: 40px; border-radius: 10px; margin-top: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
+        .detail-item { margin-bottom: 20px; border-bottom: 1px solid #ddd; padding-bottom: 10px; }
+        .detail-item:last-child { border-bottom: none; }
+        .detail-label { font-weight: bold; color: #888; font-size: 0.9rem; text-transform: uppercase; }
+        .detail-value { font-size: 1.2rem; font-weight: 600; }
+        footer { text-align: center; padding: 20px; font-size: 0.9rem; color: #888; margin-top: 30px; }
 
-        .card h2 {
-            font-size: 2.5rem;
-            margin-bottom: 10px;
-        }
-
-        .date-badge {
-            background: var(--gold);
-            color: var(--dark);
-            padding: 5px 15px;
-            border-radius: 20px;
-            font-weight: bold;
-            display: inline-block;
-            margin-top: 10px;
-        }
-
-        /* Detail Acara */
-        .details-box {
-            background: var(--white);
-            color: var(--dark);
-            padding: 40px;
-            border-radius: 10px;
-            margin-top: 20px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-        }
-
-        .detail-item {
-            margin-bottom: 20px;
-            border-bottom: 1px solid #ddd;
-            padding-bottom: 10px;
-        }
-        
-        .detail-item:last-child {
-            border-bottom: none;
-        }
-
-        .detail-label {
-            font-weight: bold;
-            color: #888;
-            font-size: 0.9rem;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-
-        .detail-value {
-            font-size: 1.2rem;
-            font-weight: 600;
-        }
-
-        /* Footer */
-        footer {
-            text-align: center;
-            padding: 20px;
-            font-size: 0.9rem;
-            color: #888;
-            margin-top: 30px;
-        }
-
-        /* Keyframes untuk animasi panah */
         @keyframes bounce {
             0%, 20%, 50%, 80%, 100% {transform: translateY(0);}
             40% {transform: translateY(-10px);}
             60% {transform: translateY(-5px);}
         }
 
-        /* Responsive Mobile */
+        /* --- TAMPILAN TOMBOL MUSIK --- */
+        .music-btn {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 50px;
+            height: 50px;
+            background-color: var(--gold);
+            color: var(--dark);
+            border-radius: 50%;
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+            z-index: 100;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            animation: spin 4s linear infinite; /* Animasi berputar */
+        }
+
+        .music-btn.paused {
+            animation: none; /* Berhenti putar kalau lagu pause */
+            background-color: #555;
+            color: #fff;
+        }
+
+        @keyframes spin { 100% { transform: rotate(360deg); } }
+
         @media (max-width: 600px) {
             .hero h1 { font-size: 2.5rem; }
             .card h2 { font-size: 2rem; }
         }
     </style>
 </head>
-<body>
+<body onclick="playMusic()"> <audio id="bg-audio" loop>
+        <source src="musik.mp3" type="audio/mp3">
+    </audio>
+
+    <button class="music-btn paused" id="musicBtn" onclick="toggleMusic(event)">
+        🎵
+    </button>
 
     <header class="hero">
         <div class="hero-content" data-aos="fade-up" data-aos-duration="1500">
             <h3>Undangan Syukur</h3>
             <h1>Keluarga Cak Emanratu</h1>
             <p>Dengan penuh rasa sukacita, kami mengundang Bapak/Ibu/Saudara/i untuk hadir dalam acara syukuran kami.</p>
+            <p style="font-size: 0.8rem; margin-top: 10px; opacity: 0.8;">(Ketuk layar untuk memutar musik)</p>
         </div>
         <div class="scroll-down">↓</div>
     </header>
 
     <div class="container">
-        
         <div class="syukur-section">
-            
             <div class="card" data-aos="fade-right">
                 <h3>Syukur HUT Ke-50</h3>
                 <h2>Bpk. Cak Emanratu</h2>
                 <p>Genap 50 Tahun pada:</p>
                 <div class="date-badge">12 Desember 2025</div>
             </div>
-
             <div class="card" data-aos="fade-left">
                 <h3>Syukur HUT Ke-48</h3>
                 <h2>Ibu Andjela Louw</h2>
                 <p>Genap 48 Tahun pada:</p>
                 <div class="date-badge">06 Desember 2025</div>
             </div>
-
             <div class="card" data-aos="zoom-in">
                 <h3>Syukur Atas</h3>
                 <h2>Bebas Bersyarat</h2>
@@ -214,32 +147,26 @@
                 <p><small>Terhitung Tanggal</small></p>
                 <div class="date-badge">15 November 2025</div>
             </div>
-
         </div>
 
         <div class="details-box" data-aos="flip-up" data-aos-duration="1000">
             <h2 style="color: var(--dark); margin-bottom: 20px;">Waktu & Tempat</h2>
-            
             <div class="detail-item">
                 <div class="detail-label">Hari / Tanggal</div>
                 <div class="detail-value">Jumat, 12 Desember 2025</div>
             </div>
-
             <div class="detail-item">
                 <div class="detail-label">Waktu</div>
                 <div class="detail-value">Pukul 19.00 WIT - Selesai</div>
             </div>
-
             <div class="detail-item">
                 <div class="detail-label">Tempat</div>
                 <div class="detail-value">Rumah Kel. Cak Emanratu<br>Gunung Nona Atas</div>
             </div>
-
             <p style="margin-top: 20px; font-style: italic;">
                 "Demikian undangan ini kami sampaikan. Atas kehadiran dan doa restu Bapak/Ibu/Saudara/i, kami ucapkan terima kasih."
             </p>
         </div>
-
     </div>
 
     <footer>
@@ -248,11 +175,39 @@
 
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script>
-        // Mengaktifkan animasi scroll
-        AOS.init({
-            once: true, // Animasi hanya terjadi sekali saat scroll ke bawah
-            offset: 100, // Mulai animasi sedikit sebelum elemen terlihat
-        });
+        AOS.init({ once: true, offset: 100 });
+
+        // --- SCRIPT MUSIK ---
+        var audio = document.getElementById("bg-audio");
+        var btn = document.getElementById("musicBtn");
+        var isPlaying = false;
+
+        function toggleMusic(event) {
+            event.stopPropagation(); // Mencegah bentrok dengan onclick body
+            if (isPlaying) {
+                audio.pause();
+                btn.classList.add("paused");
+                btn.innerHTML = "🔇"; // Ikon mati
+            } else {
+                audio.play();
+                btn.classList.remove("paused");
+                btn.innerHTML = "🎵"; // Ikon nyala
+            }
+            isPlaying = !isPlaying;
+        }
+
+        // Coba putar saat user klik di mana saja pertama kali
+        function playMusic() {
+            if (!isPlaying) {
+                audio.play().then(() => {
+                    isPlaying = true;
+                    btn.classList.remove("paused");
+                    btn.innerHTML = "🎵";
+                }).catch(error => {
+                    console.log("Autoplay dicegah browser, menunggu interaksi user.");
+                });
+            }
+        }
     </script>
 </body>
 </html>
